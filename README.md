@@ -1,2 +1,6 @@
 # SeguridadVialPeru
-Se analiza la densidad espacial de siniestros de tránsito fatales ocurridos en Perú a partir de los datos históricos del Observatorio Nacional de Seguridad Vial.
+En Perú, se han registrado alrededor de 29 mil siniestros de tránsito fatales desde el año 2010 al 2021. Cada uno de estos siniestros está vinculando en cierta medida a las condiciones del entorno en el que ocurrió, dado que estas pueden propiciar o agravar el siniestro. En ese sentido, es importante que puedan tomarse acciones que permitan reducir significativamente las muertes y lesiones graves como consecuencia de la alta siniestralidad vial.
+
+El presente estudio es realizado para la Dirección de Seguridad Vial del Ministerio de Transportes y Comunicaciones del Perú y pretende establecer un algoritmo sistematizado y reproducible para la identificación y priorización de clústeres o tramos de alta densidad de siniestros viales. La técnica empleada se basa en el análisis geográfico de algoritmos de Machine Learning como el Agrupamiento Espacial Basado en Densidad de Aplicaciones con Ruido (DBSCAN en inglés).
+
+Como resultado, se definen 83 clústeres o tramos localizados en diversos Códigos de Ruta del Sistema Nacional de Carreteras (SINAC) y, administrados por concesionarias y entidades estatales. A partir de ello, se impulsa la inspección especializada y particular de cada clúster o tramo como base para el desarrollo de propuestas de mitigación de riesgos viales en el marco de una gestión pública basada en evidencias.
