@@ -1,7 +1,7 @@
-<a href="https://www.onsv.gob.pe/"><img align="right" height="150" src="index_images/logo-onsv.png" link > </a>
+<a href="https://www.onsv.gob.pe/"><img align="right" height="200" src="index_images/logo-onsv.png" link > </a>
 
 
-# DBSCAN: Explorando la densidad espacial de siniestros fatales para la identificación y priorización de intervenciones en la Red Vial Nacional
+## DBSCAN: Explorando la densidad espacial de siniestros fatales para la identificación y priorización de intervenciones en la Red Vial Nacional
 
 ### Working Paper 01 desarrollado para el Observatorio Nacional de Seguridad Vial
 
