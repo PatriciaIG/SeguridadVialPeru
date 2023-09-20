@@ -17,6 +17,22 @@ José Mogollón <br />
 Nuria Diaz <br />
 Williams Quispe  
 
+<table border="0">
+ <tr>
+    <td>
+      - Alex Sigüenza <br />
+      - Darly Paz <br />
+      - Freddy Castañeda <br />
+      - Gabriel Legua
+    </td>
+    <td>
+      - José Mogollón <br />
+      - Nuria Diaz <br />
+      - Williams Quispe 
+    </td>
+   </tr>
+</table>
+
 **Personal técnico responsable de diseño gráfico:** <br />
 Ademir Neyra Meza
 
