@@ -9,7 +9,6 @@
 Patricia Illacanchi Guerra
 
 **Equipo responsable de la revisión del estudio:** <br />
-
 - Alex Sigüenza <br />
 - Darly Paz <br />
 - Freddy Castañeda <br />
