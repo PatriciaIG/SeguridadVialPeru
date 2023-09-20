@@ -1,6 +1,6 @@
 # DBSCAN: Explorando la densidad espacial de siniestros fatales para la identificación y priorización de intervenciones en la Red Vial Nacional
 
-[alt text](index_images/logo-onsv.png)
+![tittle](index_images/logo-onsv.png)
 
 ### Working Paper 01 desarrollado para el Observatorio Nacional de Seguridad Vial
 
