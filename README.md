@@ -21,4 +21,4 @@ El presente estudio es realizado para la Dirección de Seguridad Vial del Minist
 Como resultado, se definen 83 clústeres o tramos localizados en diversos Códigos de Ruta del Sistema Nacional de Carreteras (SINAC) y, administrados por concesionarias y entidades estatales. A partir de ello, se impulsa la inspección especializada y particular de cada clúster o tramo como base para el desarrollo de propuestas de mitigación de riesgos viales en el marco de una gestión pública basada en evidencias.
 
 ## Mapa Interactivo de clústeres o tramos de alta densidad de siniestros fatales
-https://patriciaig.github.io/SeguridadVialPeru/mapa_tramos_alta_densidad_fatalidades.html
+Los detalles de los clústeres o tramos de alta siniestralidad pueden ser explorados en el [siguiente mapa].(https://patriciaig.github.io/SeguridadVialPeru/mapa_tramos_alta_densidad_fatalidades.html)
