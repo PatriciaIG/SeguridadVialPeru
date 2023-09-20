@@ -9,13 +9,7 @@
 Patricia Illacanchi Guerra
 
 **Equipo responsable de la revisión del estudio:** <br />
-- Alex Sigüenza <br />
-- Darly Paz <br />
-- Freddy Castañeda <br />
-- Gabriel Legua <br />
-- José Mogollón <br />
-- Nuria Diaz <br />
-- Williams Quispe 
+Alex Sigüenza, Darly Paz, Freddy Castañeda, Gabriel Legua, José Mogollón, Nuria Diaz, Williams Quispe 
 
 **Personal técnico responsable de diseño gráfico:** <br />
 Ademir Neyra Meza
