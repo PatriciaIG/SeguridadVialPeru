@@ -9,13 +9,13 @@
 Patricia Illacanchi Guerra
 
 **Equipo responsable de la revisión del estudio:** <br />
-<table border="0">
+<table border=none >
  <tr>
     <td>
-      - Alex Sigüenza <br />
-      - Darly Paz <br />
-      - Freddy Castañeda <br />
-      - Gabriel Legua
+      * Alex Sigüenza <br />
+      * Darly Paz <br />
+      * Freddy Castañeda <br />
+      * Gabriel Legua
     </td>
     <td>
       - José Mogollón <br />
