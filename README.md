@@ -9,9 +9,13 @@
 Patricia Illacanchi Guerra
 
 **Equipo responsable de la revisión del estudio:** <br />
-Alex Sigüenza Alvarez <br />
-Freddy Castañeda Rios <br />
-Gabriel Legua Landeo
+Alex Sigüenza <br />
+Darly Paz <br />
+Freddy Castañeda <br />
+Gabriel Legua <br />
+José Mogollón <br />
+Nuria Diaz <br />
+Williams Quispe  
 
 **Personal técnico responsable de diseño gráfico:** <br />
 Ademir Neyra Meza
@@ -43,10 +47,10 @@ Este instrumento se difunde como diagnóstico sobre el que los administradores d
 
 ## Mapa Interactivo de clústeres o tramos de alta densidad de siniestros fatales
 
-**Datos del ONSV 2021 - 2022**
+**Datos del ONSV de enero 2021 a diciembre de 2022:**
 
 Los detalles de los 83 clústeres o tramos de alta siniestralidad identificados con datos de este período de datos pueden ser explorados en el [siguiente mapa interactivo](https://patriciaig.github.io/SeguridadVialPeru/mapa_tramos_alta_densidad_fatalidades.html).
 
-**Datos del ONSV 2021 - julio 2023**
+**Datos del ONSV de enero 2021 a julio de 2023**
 
 Los detalles de los 155 clústeres o tramos de alta siniestralidad identificados con datos actualizados a julio del 2023 pueden ser explorados en el [siguiente mapa interactivo](https://patriciaig.github.io/SeguridadVialPeru/mapa_prueba.html).
