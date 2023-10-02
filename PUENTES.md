@@ -19,6 +19,7 @@ Asimismo, se han identificado los siniestros fatales que se han registrado en el
 
   Del catálogo de llaves, valores y atributos de OSM se han identificado las siguientes categorías de interés:
   fdsfd
+
   
 ```
    (key = "bridge", value="yes")
