@@ -89,7 +89,7 @@ remover <- c(762115758,762115755,485696616,1191546450,1191546436,437359837,41980
 df <- df[!(df$osm_id %in% remover),]
 ```
 
-> * Nota: Los identificadores presentados anteriormente son estáticos e identificables a través de OpenStreetMat, a menos que sean actualizados. *
+>  Nota: Los identificadores presentados anteriormente son estáticos e identificables a través de OpenStreetMat, a menos que sean actualizados. 
              
 - Definición de Zonas de Influencia de los Puentes Peatonales
 
@@ -101,77 +101,46 @@ df <- st_simplify(df,dTolerance =1000)
 puentes_buffered <- st_buffer(df,dist = 400,endCapStyle = "FLAT")
 ```                              
 
-tm_shape(puentes_buffered) + 
-  tm_fill(col="lightblue",alpha = 0.3)+
-  tm_shape(df) + 
-  tm_lines(col="blue",lwd = 5)+
-  #tm_shape(puentes_buffered) + 
- #tm_borders(col="blue",lwd = 0.5)+
-  tm_shape(atropellos) + 
-  tm_dots(col="red",size = 0.02)
+- Identificación de siniestros fatales de clase atropello
 
-#marcar si siniestro ocurrió en la proximidad del puente peatonal
+  Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de julio de 2023, se dispone de 5548 siniestros fatales a nivel nacional como datos de entrada. Estos registro corresponden a la base de datos histórica del ONSV recopilada desde el 2021. 
 
-#-------------- DEFINICION DE ZONAS DE INFLUENCIA DE PUENTES PEATONALES
+Para fines de este análisis sobre puentes peatonales, se han seleccionado a los siniestros fatales de clase atropello y atropello/fuga porque involucran al peatón como víctima. Del mismo modo, los puentes peatonales tienen un rol crucial en la prevención de esta clase específica de siniestros fatales.
 
+- Selección de atropellos en Zona de Influencia de Puentes Peatonales
 
+  Como resultado de este análisis, se ha detectado que 119 de los 1570 atropellos registrados entre 2021 y julio de 2023, alrededor de 8%, han ocurrido en zonas de influencia de los puentes peatonales. Esta cifra no debería indicarnos que la causa principal del siniestro fue la imprudencia del peatón al no usar los puentes peatonales próximos. Por el contrario, esto debería motivar a estudiar a detalle las condiciones actuales en las que están implementados hoy los puentes peatonales y las razones por las que no son usados. De este modo, la recuperación y planificación de la infraestructura deben incorporar elementos de seguridad y accesibiliad universal para el cruce peatonal como prioridad de la movilidad sostenible.
 
-#-------------- CONTEO DE ATROPELLOS PROXIMOS A PUENTES PEATONALES
+  ```     
+      crash_pp <- st_intersection(puentes_buffered,atropellos)
+      
+      crash_countpp <-  as.data.frame(count(crash_pp$osm_id))
+      colnames(crash_countpp) <- c("osm_id","Atropellos en PP")
+      
+      df <- merge(df, crash_countpp, by="osm_id", all.x=TRUE)
+      puentes_buffered <-  merge(puentes_buffered, crash_countpp, by="osm_id", all.x=TRUE)
 
-crash_pp <- st_intersection(puentes_buffered,atropellos)
+      #marcar los siniestros en las zonas de puentes peatonales
+      lista_atrop_pp <- crash_pp$XUFeffCodigoAccidente
 
-crash_countpp <-  as.data.frame(count(crash_pp$osm_id))
-colnames(crash_countpp) <- c("osm_id","Atropellos en PP")
+      atropellos <- atropellos%>%
+        mutate(EnPuentePeatonal=NA)
 
-df <- merge(df, crash_countpp, by="osm_id", all.x=TRUE)
-puentes_buffered <-  merge(puentes_buffered, crash_countpp, by="osm_id", all.x=TRUE)
+      atropellos[atropellos$XUFeffCodigoAccidente %in% lista_atrop_pp,]$EnPuentePeatonal <- "Sí"
+  ```
+  - Visualización de Puentes Peatonales en los que se registran víctimas fatales
 
-#marcar los siniestros en las zonas de puentes peatonales
-lista_atrop_pp <- crash_pp$XUFeffCodigoAccidente
-
-atropellos <- atropellos%>%
-  mutate(EnPuentePeatonal=NA)
-
-atropellos[atropellos$XUFeffCodigoAccidente %in% lista_atrop_pp,]$EnPuentePeatonal <- "Sí"
-
+```
 ##plotear los puentes peatonales que tienes 1 o + siniestros fatales
 df$`Atropellos en PP`!=0
+seleccion1 <- df[!is.na(df$`Atropellos en PP`),]
+seleccion2 <- puentes_buffered[!is.na(puentes_buffered$`Atropellos en PP`),]
 
-sel5 <- df[!is.na(df$`Atropellos en PP`),]
-sel6 <- puentes_buffered[!is.na(puentes_buffered$`Atropellos en PP`),]
-
-  tm_shape(sel6) + 
+  tm_shape(seleccion2) + 
   tm_fill(col="lightblue",alpha = 0.7)+
-  tm_shape(sel5) + 
+  tm_shape(seleccion1) + 
   tm_lines(col="blue",lwd = 5)+
-  tm_shape(atropellos) + 
-  tm_dots(col="red",size = 0.02)
+  tm_shape(crash_pp)+
+  tm_dots(col="red",size=0.02)
 
-write.table(atropellos, "resultados-atropellos-pp.csv",sep = ";")
-write.table(df, "resultados-pp-conteo-atropellos.csv",sep = ";")
-
-
-#-------------- CONTEO DE ATROPELLOS PROXIMOS A PUENTES PEATONALES
 ```
-
-La metodología ha sido desarrollada en código R, de modo que pueda ser reproducible a medida que los datos de sinestros del ONSV son robustecidos. A la fecha, se han realizados dos etapas de análisis:
-
-**- Procesamiento con datos del ONSV desde enero 2021 a diciembre de 2022:**
-
-Los datos georreferenciados de siniestros fatales del 2021 al 2022 se encuentran publicados en la sección Datos Abiertos de la web del ONSV y pueden descargarse [aquí](https://www.onsv.gob.pe/datosabiertos). A partir del procesamiento de 2,246 siniestros fatales en la Red Vial Nacional como datos de entrada, se identificaron 83 clústeres o tramos de alta densidad de siniestros.
-
-**- Procesamiento con datos del ONSV desde enero 2021 a julio de 2023:**
-
-Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de julio de 2023, se han incorporado 903 nuevos registros, lo cual suma 3,149 siniestros fatales en la Red Vial Nacional como datos de entrada. Se identificaron 155 clústeres o tramos de alta densidad de siniestros, de los cuales 76 son resultado de la actualización de los datos. 
-
-Este instrumento se difunde como diagnóstico sobre el que los administradores deben iniciar la investigación particular de las condiciones de riesgo de la infraestructura y vial y, tomar acciones para garantizar la seguridad vial desde una perspectiva de Visión Cero y personas usuarias vulnerables.
-
-## Mapa Interactivo de clústeres o tramos de alta densidad de siniestros fatales
-
-**Datos del ONSV de enero 2021 a diciembre de 2022:**
-
-Los detalles de los 83 clústeres o tramos de alta siniestralidad identificados con datos de este período de datos pueden ser explorados en el [siguiente mapa interactivo](https://patriciaig.github.io/SeguridadVialPeru/mapa_tramos_alta_densidad_fatalidades.html).
-
-**Datos del ONSV de enero 2021 a julio de 2023**
-
-Los detalles de los 155 clústeres o tramos de alta siniestralidad identificados con datos actualizados a julio del 2023 pueden ser explorados en el [siguiente mapa interactivo](https://patriciaig.github.io/SeguridadVialPeru/mapa_prueba.html).
