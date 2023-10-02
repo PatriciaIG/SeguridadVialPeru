@@ -61,7 +61,8 @@ tm_shape(puentes$osm_lines) +
   tm_lines(col="green",lwd=5)
 
 ```
-<img title="a title" alt="Alt text" src="/index_images/puente.png.svg">
+<a href="https://www.onsv.gob.pe/"><img align="right" height="100" src="index_images/puente.png" float="right" link> </a>
+
 
 #------------ EXTRAER INFORMACIóN DE PUENTES PEATONALES DE OPEN STREET MAP
 
