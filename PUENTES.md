@@ -18,9 +18,7 @@ Asimismo, se han identificado los siniestros fatales que se han registrado en el
 - Extracción de información cruda de OpenStreetMap (OSM)
 
   Del catálogo de llaves, valores y atributos de OSM se han identificado las siguientes categorías de interés:
-  fdsfd
-
-  
+    
 ```
    (key = "bridge", value="yes")
   (key = "highway", value="footway")
@@ -31,11 +29,10 @@ Asimismo, se han identificado los siniestros fatales que se han registrado en el
   (key = "crossing", value="!marked")
   (key = "crossing", value="!traffic_signals")
 ```
+
   Estas han sido extraídas considerando el área geográfica del territorio peruano
   
 ```
-#------------ EXTRAER INFORMACIóN DE PUENTES PEATONALES DE OPEN STREET MAP
-
 min_lon <- -81.237163; max_lon <- -68.616354
 min_lat <- -18.333057; max_lat <- 0.081098
 
@@ -56,9 +53,15 @@ puentes <-opq(bbox = bbx ) %>%
   add_osm_feature(key = "crossing", value="!traffic_signals")%>%
   osmdata_sf()
 
+```
+  La visualización de los datos crudos de los puentes puede visualizarse en la siguiente imagen:
+  
+```
 tm_shape(puentes$osm_lines) + 
   tm_lines(col="green",lwd=5)
 
+```
+<img align="center" height="100" src="index_images/puente.png" float="right" link>
 
 
 #------------ EXTRAER INFORMACIóN DE PUENTES PEATONALES DE OPEN STREET MAP
