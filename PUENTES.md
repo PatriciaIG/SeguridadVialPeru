@@ -1,31 +1,25 @@
 <a href="https://www.onsv.gob.pe/"><img align="right" height="100" src="index_images/logo-onsv.png" float="right" link> </a>
 
 
-## DBSCAN: Explorando la densidad espacial de siniestros fatales para la identificación y priorización de intervenciones en la Red Vial Nacional
+## Identificación de puentes peatonales y siniestralidad
 
-### [Documento de Trabajo 001](https://www.onsv.gob.pe/post/dbscan-explorando-la-densidad-espacial-de-siniestros-fatales-para-la-identificacion-y-priorizacion-de-intervenciones-en-la-red-vial-nacional/) del Observatorio Nacional de Seguridad Vial (ONSV)
+### Exploración del Observatorio Nacional de Seguridad Vial (ONSV)
 
-**Especialista responsable del desarrollo del estudio:** <br />
+**Especialista responsable:** <br />
 Patricia Illacanchi Guerra
 
-**Equipo responsable de la revisión del estudio:** <br />
-Alex Sigüenza, Darly Paz, Freddy Castañeda, Gabriel Legua, José Mogollón, Nuria Diaz, Williams Quispe
+## Introducción
+En el presente documento, se ha identificado la localización de puentes peatonales a nivel nacional a partir de la exploración de mapas base de OpenStreetMap. Sobre esta base de datos, se han extraído las capas de interés y se ha realizado la verificación y limpieza de datos para obtener los puentes peatonales georreferenciados.
 
-**Personal técnico responsable de diseño gráfico:** <br />
-Ademir Neyra Meza
+Asimismo, se han identificado los siniestros fatales que se han registrado en el radio de 400 metros próximos a los puentes peatonales identificados.
 
-## Resumen
-En Perú, se han registrado alrededor de 29 mil siniestros de tránsito fatales desde el año 2010 al 2021. Cada uno de estos siniestros está vinculando en cierta medida a las condiciones del entorno en el que ocurrió, dado que estas pueden propiciar o agravar el siniestro. En ese sentido, es importante que puedan tomarse acciones que permitan reducir significativamente las muertes y lesiones graves como consecuencia de la alta siniestralidad vial.
+## código desarrollado
 
-El presente estudio es realizado para la Dirección de Seguridad Vial del Ministerio de Transportes y Comunicaciones del Perú y pretende establecer un algoritmo sistematizado y reproducible para la identificación y priorización de clústeres o tramos de alta densidad de siniestros viales. La técnica empleada se basa en el análisis geográfico de algoritmos de Machine Learning como el Agrupamiento Espacial Basado en Densidad de Aplicaciones con Ruido (DBSCAN en inglés).
-
-Como resultado de esta metodología desarrollada por el ONSV, se identificaron clústeres o tramos de alta densidad de siniestros fatales en la Red Vial Nacional, administrados por concesionarias y entidades estatales . A partir de ello, se impulsa la inspección especializada y particular de cada clúster o tramo como base para el desarrollo de propuestas de mitigación de riesgos viales en el marco de una gestión pública basada en evidencias.
-
-En específico, esta exploración geográfica desarrollada en el presente estudio pretende dar respuesta a la pregunta siguiente:
-
-> ***¿Cuáles son los tramos viales en los que los administradores de la vía pueden implementar medidas que tengan alto impacto en la reducción de la siniestralidad vial?***
-
-## Resultados 
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
 
 La metodología ha sido desarrollada en código R, de modo que pueda ser reproducible a medida que los datos de sinestros del ONSV son robustecidos. A la fecha, se han realizados dos etapas de análisis:
 
