@@ -105,7 +105,7 @@ puentes_buffered <- st_buffer(df,dist = 400,endCapStyle = "FLAT")
 
   Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de julio de 2023, se dispone de 5548 siniestros fatales a nivel nacional como datos de entrada. Estos registro corresponden a la base de datos histórica del ONSV recopilada desde el 2021. 
 
-Para fines de este análisis sobre puentes peatonales, se han seleccionado a los siniestros fatales de clase atropello y atropello/fuga porque involucran al peatón como víctima. Del mismo modo, los puentes peatonales tienen un rol crucial en la prevención de esta clase específica de siniestros fatales.
+  Para fines de este análisis sobre puentes peatonales, se han seleccionado a los siniestros fatales de clase atropello y atropello/fuga porque involucran al peatón como víctima. Del mismo modo, los puentes peatonales tienen un rol crucial en la prevención de esta clase específica de siniestros fatales.
 
 - Selección de atropellos en Zona de Influencia de Puentes Peatonales
 
