@@ -66,6 +66,7 @@ tm_shape(puentes$osm_lines) +
 
   Se ha removido elementos de código fijo de OSM que escapan de los atributos que los puentes peatonales tienen. Asimismo, solo se ha seleccionado los puentes peatonales como líneas de trayectoría perpendicular a la vía mas no los componentes como rampas y escaleras. De este modo, se podrán definir las zonas de influencia de estos puentes de forma adecuada.
 
+```
 remover <- c(762115758,762115755,485696616,1191546450,1191546436,437359837,419809122,
   419809122,1151086064,907487941,758781462,315840124,315840126,1202939633,
   597140400,597140399,964042833,653486650,149300964,617462807,673974160,
@@ -84,18 +85,21 @@ remover <- c(762115758,762115755,485696616,1191546450,1191546436,437359837,41980
   1197181727,1034697324,1034697322,1007426245,413475777,935228646,935228643,
   1190443814,1190443126,1190436478,1029895115,1190660416,1148324858,617257907,
   617257908,617257905,617277923,617257905,617257912,617257908,617257912)
-
-::: {#hello .greeting .message style="color: red;"}
-Hello **world**!
-:::
-             
+  
 df <- df[!(df$osm_id %in% remover),]
+```
 
+> * Nota: Los identificadores presentados anteriormente son estáticos e identificables a través de OpenStreetMat, a menos que sean actualizados. *
+             
+- Definición de Zonas de Influencia de los Puentes Peatonales
+
+  A partir de la revisión de estudios, se ha identificado que los puentes peatonales pueden tener influencia en las personas en una proximidad de 400 metros. Por ello, se han definido buffers a una proximidad de 400 metros
+
+```
 df <- st_simplify(df,dTolerance =1000)
  
 puentes_buffered <- st_buffer(df,dist = 400,endCapStyle = "FLAT")
-                              
-                              #joinStyle = "MITRE",mitreLimit =  0.5)
+```                              
 
 tm_shape(puentes_buffered) + 
   tm_fill(col="lightblue",alpha = 0.3)+
