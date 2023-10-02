@@ -15,6 +15,23 @@ Asimismo, se han identificado los siniestros fatales que se han registrado en el
 
 ## Código desarrollado
 
+- Extracción de información cruda de OpenStreetMap (OSM)
+
+  Del catálogo de llaves, valores y atributos de OSM se han identificado las siguientes categorías de interés:
+  fdsfd
+  
+```
+   (key = "bridge", value="yes")
+  (key = "highway", value="footway")
+  (key = "footway", value="!sidewalk")
+  (key = "incline", value="!down")
+  (key = "incline", value="!up")
+  (key = "bicycle", value="!yes")
+  (key = "crossing", value="!marked")
+  (key = "crossing", value="!traffic_signals")
+```
+  Estas han sido extraídas considerando el área geográfica del territorio peruano
+  
 ```
 #------------ EXTRAER INFORMACIóN DE PUENTES PEATONALES DE OPEN STREET MAP
 
