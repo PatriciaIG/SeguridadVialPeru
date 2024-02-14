@@ -56,4 +56,4 @@ Los detalles de los 155 clústeres o tramos de alta siniestralidad identificados
 
 **Datos del ONSV de enero 2021 a diciembre de 2023**
 
-Los detalles de los 210 clústeres o tramos de alta siniestralidad identificados con datos actualizados a diciembre de 2023 pueden ser explorados en el [siguiente mapa interactivo]([https://patriciaig.github.io/SeguridadVialPeru/mapa_prueba.html](https://drive.google.com/file/d/1WFBS5x9kTyBbWTeSeOihxC2MpVEwP2zd/view?usp=sharing)https://drive.google.com/file/d/1WFBS5x9kTyBbWTeSeOihxC2MpVEwP2zd/view?usp=sharing).
+Los detalles de los 210 clústeres o tramos de alta siniestralidad identificados con datos actualizados a diciembre de 2023 pueden ser explorados en el [siguiente mapa interactivo](https://drive.google.com/file/d/1WFBS5x9kTyBbWTeSeOihxC2MpVEwP2zd/view?usp=sharing)
