@@ -6,10 +6,10 @@
 ### [Documento de Trabajo 001](https://www.onsv.gob.pe/post/dbscan-explorando-la-densidad-espacial-de-siniestros-fatales-para-la-identificacion-y-priorizacion-de-intervenciones-en-la-red-vial-nacional/) del Observatorio Nacional de Seguridad Vial (ONSV)
 
 **Especialista responsable del desarrollo del estudio:** <br />
-Patricia Illacanchi Guerra
+Patricia Illacanchi Guerra, Xamir Olórtegui Campos
 
 **Equipo responsable de la revisión del estudio:** <br />
-Alex Sigüenza, Darly Paz, Freddy Castañeda, Gabriel Legua, José Mogollón, Nuria Diaz, Williams Quispe
+Darly Paz, Freddy Castañeda, Gabriel Legua, José Mogollón, Nuria Diaz, Williams Quispe
 
 **Personal técnico responsable de diseño gráfico:** <br />
 Ademir Neyra Meza
@@ -37,8 +37,13 @@ Los datos georreferenciados de siniestros fatales del 2021 al 2022 se encuentran
 
 Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de julio de 2023, se han incorporado 903 nuevos registros, lo cual suma 3,149 siniestros fatales en la Red Vial Nacional como datos de entrada. Se identificaron 155 clústeres o tramos de alta densidad de siniestros, de los cuales 76 son resultado de la actualización de los datos. 
 
-Este instrumento se difunde como diagnóstico sobre el que los administradores deben iniciar la investigación particular de las condiciones de riesgo de la infraestructura y vial y, tomar acciones para garantizar la seguridad vial desde una perspectiva de Visión Cero y personas usuarias vulnerables.
+Estos instrumento se difunde como diagnóstico sobre el que los administradores deben iniciar la investigación particular de las condiciones de riesgo de la infraestructura y vial y, tomar acciones para garantizar la seguridad vial desde una perspectiva de Visión Cero y personas usuarias vulnerables.
 
+**- Procesamiento con datos del ONSV desde enero 2021 a diciembre de 2023:**
+
+Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de diciembre de 2023, se han incorporado 506 nuevos registros, lo cual suma 3,655 siniestros fatales en la Red Vial Nacional como datos de entrada. Se identificaron 210 clústeres o tramos de alta densidad de siniestros, de los cuales 55 son resultado de la actualización de los datos. 
+
+Estos instrumento se difunde como diagnóstico sobre el que los administradores deben iniciar la investigación particular de las condiciones de riesgo de la infraestructura y vial y, tomar acciones para garantizar la seguridad vial desde una perspectiva de Visión Cero y personas usuarias vulnerables.
 ## Mapa Interactivo de clústeres o tramos de alta densidad de siniestros fatales
 
 **Datos del ONSV de enero 2021 a diciembre de 2022:**
@@ -47,4 +52,8 @@ Los detalles de los 83 clústeres o tramos de alta siniestralidad identificados 
 
 **Datos del ONSV de enero 2021 a julio de 2023**
 
-Los detalles de los 155 clústeres o tramos de alta siniestralidad identificados con datos actualizados a julio del 2023 pueden ser explorados en el [siguiente mapa interactivo](https://patriciaig.github.io/SeguridadVialPeru/mapa_prueba.html).
+Los detalles de los 155 clústeres o tramos de alta siniestralidad identificados con datos actualizados a julio de 2023 pueden ser explorados en el [siguiente mapa interactivo](https://patriciaig.github.io/SeguridadVialPeru/mapa_prueba.html).
+
+**Datos del ONSV de enero 2021 a diciembre de 2023**
+
+Los detalles de los 210 clústeres o tramos de alta siniestralidad identificados con datos actualizados a diciembre de 2023 pueden ser explorados en el [siguiente mapa interactivo]([https://patriciaig.github.io/SeguridadVialPeru/mapa_prueba.html](https://drive.google.com/file/d/1WFBS5x9kTyBbWTeSeOihxC2MpVEwP2zd/view?usp=sharing)https://drive.google.com/file/d/1WFBS5x9kTyBbWTeSeOihxC2MpVEwP2zd/view?usp=sharing).
