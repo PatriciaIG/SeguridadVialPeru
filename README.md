@@ -44,6 +44,7 @@ Estos instrumento se difunde como diagnóstico sobre el que los administradores 
 Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de diciembre de 2023, se han incorporado 506 nuevos registros, lo cual suma 3,655 siniestros fatales en la Red Vial Nacional como datos de entrada. Se identificaron 210 clústeres o tramos de alta densidad de siniestros, de los cuales 55 son resultado de la actualización de los datos. 
 
 Estos instrumento se difunde como diagnóstico sobre el que los administradores deben iniciar la investigación particular de las condiciones de riesgo de la infraestructura y vial y, tomar acciones para garantizar la seguridad vial desde una perspectiva de Visión Cero y personas usuarias vulnerables.
+
 ## Mapa Interactivo de clústeres o tramos de alta densidad de siniestros fatales
 
 **Datos del ONSV de enero 2021 a diciembre de 2022:**
