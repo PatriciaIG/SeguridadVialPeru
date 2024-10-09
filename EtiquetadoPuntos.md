@@ -1,9 +1,9 @@
 <a href="https://www.onsv.gob.pe/"><img align="right" height="100" src="index_images/logo-onsv.png" float="right" link> </a>
 
 
-## Etiquetado de archivos geográficos de puntos con la red vial (Código en R)
+## Etiquetado de archivos geográficos de puntos con la red vial 
 
-### Exploración del Observatorio Nacional de Seguridad Vial (ONSV)
+### Código en R
 
 **Especialista responsable:** <br />
 Patricia Illacanchi Guerra
