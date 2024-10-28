@@ -151,7 +151,7 @@ my_map <- tmap_leaflet(my_map)
 library(htmlwidgets)
 saveWidget(my_map, "rail_road_map_onsv.html", selfcontained = TRUE)
 ```
-En la figura siguiente, se puede mostrar una visualización del mapa desarrollado con la extracción de datos de rutas e intersecciones ferroviarias
+En la figura siguiente, se puede mostrar una visualización del mapa desarrollado con la extracción de datos de rutas e intersecciones ferroviarias:
 ![Descripción de la imagen](index_images/mapa-interactivo.png)
 
 ### 2.7 Consolidación y Exportación de Datos
