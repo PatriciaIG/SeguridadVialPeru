@@ -7,7 +7,7 @@
 Ver documento digital para reproducción en <a href="https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM">https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM</a>.
 
 Ver <a href="https://patriciaig.github.io/SeguridadVialPeru/rail_road_map_onsv">mapa interactivo</a>.
-https://patriciaig.github.io/SeguridadVialPeru/rail_road_map_onsv
+
 
 **Especialista responsable:** <br />
 Patricia Illacanchi Guerra
