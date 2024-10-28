@@ -8,6 +8,12 @@
 **Especialista responsable:** <br />
 Patricia Illacanchi Guerra
 
+## Introducción
+
+En esta guía, aprenderemos a utilizar la biblioteca `osmdata` en R para la extracción de datos ferroviarios de OpenStreetMap (OSM) específicamente para Perú. Exploraremos cómo obtener datos de rutas ferroviarias y cruces a nivel, así como algunas técnicas básicas para el procesamiento y visualización de estos datos.
+
+OpenStreetMap (OSM) es una plataforma colaborativa de datos geoespaciales de acceso libre, donde se puede encontrar información detallada sobre infraestructuras como carreteras, ferrocarriles, edificios, entre otros. OSM utiliza un formato basado en elementos clave (`key`) y valores (`value`) para describir estos datos. En nuestro caso, nos enfocaremos en la infraestructura ferroviaria.
+
 ## 1. ¿Qué es OpenStreetMap?
 OpenStreetMap (OSM) es un proyecto colaborativo que proporciona un mapa global editable y libre. Los usuarios pueden visualizar, editar y utilizar información geoespacial del mundo entero. OSM se destaca por:
 - **Accesibilidad**: Información disponible de manera libre y abierta.
@@ -31,6 +37,7 @@ En OSM, se utiliza un sistema de "llave-valor" para definir elementos. Por ejemp
 
 ### Instalación de Paquetes Necesarios
 Para realizar consultas en OSM desde R, es necesario instalar y cargar algunos paquetes:
+
 ```r
 # Instalar paquetes si no están instalados
 install.packages("osmdata")
@@ -43,140 +50,126 @@ library(osmdata)
 library(sf)
 library(tmap)
 library(htmlwidgets)
+```
 
-## Introducción
-En el presente documento, se ha identificado la localización de puentes peatonales a nivel nacional a partir de la exploración de mapas base de OpenStreetMap. Sobre esta base de datos, se han extraído las capas de interés y se ha realizado la verificación y limpieza de datos para obtener los puentes peatonales georreferenciados.
+### 2.1 Definición de la Bounding Box o  Área de Interés para Perú
+En lugar de utilizar coordenadas aproximadas, se usará una consulta específica para Perú:
 
-Asimismo, se han identificado los siniestros fatales que se han registrado en el radio de 400 metros próximos a los puentes peatonales identificados.
+```r
+# Obtener la bounding box específica para Perú usando el nombre del país
+bbox_peru <- getbb("Peru")
+```
+Alternativamente, es posible usar una caja de borde o bounding box que encierre todo el área de interés para la extracción de datos:
+```r
+# Definir una bounding box para Perú o algna ciudad 
+bbox_peru <- c(-81.35, -18.35, -68.65, 0.12)  # (min_lon, min_lat, max_lon, max_lat)
+```
+### 2.2 Extracción de Rutas Ferroviarias
+A continuación, se muestra el código para extraer las rutas ferroviarias activas en Perú:
+```r
+# Crear consulta usando el bounding box
+query <- opq(bbox = bbox_peru) %>%
+  add_osm_feature(key = "route", value = "railway")
 
-## Código desarrollado
+# Recuperar los datos
+rail_data_peru <- osmdata_sf(query)
 
-- Extracción de información cruda de OpenStreetMap (OSM)
+# Extraer las rutas ferroviarias
+rail_routes_peru <- rail_data_peru$osm_lines
 
-  Del catálogo de llaves, valores y atributos de OSM se han identificado las siguientes categorías de interés:
-    
-  ```
-  (key = "bridge", value="yes")
-  (key = "highway", value="footway")
-  (key = "footway", value="!sidewalk")
-  (key = "incline", value="!down")
-  (key = "incline", value="!up")
-  (key = "bicycle", value="!yes")
-  (key = "crossing", value="!marked")
-  (key = "crossing", value="!traffic_signals")
-  ```
+# Visualizar las rutas ferroviarias
+plot(st_geometry(rail_routes_peru), col = "blue")
+```
+### 2.3 Limpieza y Transformación de Datos
+Filtramos las vías en desuso y corregimos los datos de calibre:
+```r
+# Filtrar vías en desuso
+rail_routes_peru <- rail_routes_peru[rail_routes_peru$railway != "abandoned" & rail_routes_peru$railway != "disused", ]
 
-  Estas han sido extraídas considerando el área geográfica del territorio peruano
-  
-  ```
-  min_lon <- -81.237163; max_lon <- -68.616354
-  min_lat <- -18.333057; max_lat <- 0.081098
-  
-  bbx <- rbind(x=c(min_lon,max_lon),y=c(min_lat,max_lat))
-  colnames(bbx) <- c("min","max")
-  
-  #available tags
-  available_tags()
-  
-  puentes <-opq(bbox = bbx ) %>%
-    add_osm_feature(key = "bridge", value="yes")%>%
-    add_osm_feature(key = "highway", value="footway")%>%
-    add_osm_feature(key = "footway", value="!sidewalk")%>%
-    add_osm_feature(key = "incline", value="!down")%>%
-    add_osm_feature(key = "incline", value="!up")%>%
-    add_osm_feature(key = "bicycle", value="!yes")%>%
-    add_osm_feature(key = "crossing", value="!marked")%>%
-    add_osm_feature(key = "crossing", value="!traffic_signals")%>%
-    osmdata_sf()
-  
-  ```
-  La visualización de los datos crudos de los puentes puede visualizarse en la siguiente imagen:
-  
-  ```
-  tm_shape(puentes$osm_lines) + 
-    tm_lines(col="green",lwd=5)
-  
-  ```
+# Actualizar tipo de gauge (calibre)
+rail_routes_peru[rail_routes_peru$osm_id == 150987784, ]$gauge <- "1435"
+rail_routes_peru[rail_routes_peru$osm_id == 790095411, ]$gauge <- "1435"
+rail_routes_peru[rail_routes_peru$osm_id == 150987791, ]$gauge <- "1435"
 
-- Exploración de información importada
+# Transformar coordenadas
+rail_routes_peru <- rail_routes_peru %>%
+  st_transform(4326)
 
-  Se ha removido elementos de código fijo de OSM que escapan de los atributos que los puentes peatonales tienen. Asimismo, solo se ha seleccionado los puentes peatonales como líneas de trayectoría perpendicular a la vía mas no los componentes como rampas y escaleras. De este modo, se podrán definir las zonas de influencia de estos puentes de forma adecuada.
+```
+### 2.4 Asignación de Información de Operador y Nombres
+Identificamos diferentes rutas ferroviarias y les asignamos el operador correspondiente, así como otra información que pueda ser verificada con Ositran y otras entidades y operadores involucrados
+```r
+# Asignar operador y nombre según región geográfica
+# Ejemplo: Ferrocarril del Centro - Ferrovías Central Andina S.A.
 
-  ```
-  remover <- c(762115758,762115755,485696616,1191546450,1191546436,437359837,419809122,
-    419809122,1151086064,907487941,758781462,315840124,315840126,1202939633,
-    597140400,597140399,964042833,653486650,149300964,617462807,673974160,
-    1148068678,674563158,126865902,126865908,392016588,653484336,439927976,
-    126865908,1187727263,1187727264,1025080735,307750796,950238934,608506475,
-    1155912489,788703190,239175097,420129862,420129866,420129870,420129873,
-    992337975,992337973,1011612698,1010871483,949972237,192455900,195046261,
-    293490029,1004594047,1204040904,1204040902,1204040903,1204040901,
-    1201176905,1177161397,1152291907,1152291910,1152453996,437195689,
-    437191063,1152248628,655265152,1152259005,1152259003,1152264370,1152264371,
-    655113515,1152266473,435207754,655112675,435212483,435212487,397557518,
-    440690617,655110325,655110322,397556543,1149004841,655109082,1150551121,
-    39412326,655108636,1146112625,1146112622,440690617,449587870,1146112605,
-    1146124184,35557441,1110169195,1110169202,770067803,438490974,1091993752,
-    304549855,1093501430,299598925,651596659,1049714277,1049714278,1054796612,
-    1197181727,1034697324,1034697322,1007426245,413475777,935228646,935228643,
-    1190443814,1190443126,1190436478,1029895115,1190660416,1148324858,617257907,
-    617257908,617257905,617277923,617257905,617257912,617257908,617257912)
-    
-  df <- df[!(df$osm_id %in% remover),]
-  ```
+# Definir un bounding box para identificar las líneas
+bbox <- st_bbox(c(xmin = -77.307761, ymin = -12.344832, xmax = -75.159841, ymax = -10.461275), crs = 4326)
+bbox_polygon <- st_as_sfc(bbox)
 
-  >  Nota: Los identificadores presentados anteriormente son estáticos e identificables a través de OpenStreetMat, a menos que sean actualizados. 
-             
-- Definición de Zonas de Influencia de los Puentes Peatonales
+# Identificar líneas dentro del bounding box
+within_bbox <- st_within(rail_routes_peru, bbox_polygon)
+within_bbox <- sapply(within_bbox, function(x) ifelse(length(x) == 0, 0, 1))
 
-  A partir de la revisión de estudios, se ha identificado que los puentes peatonales pueden tener influencia en las personas en una proximidad de 400 metros. Por ello, se han definido buffers a una proximidad de 400 metros
+# Asignar nombre y operador
+rail_routes_peru$within_bbox <- within_bbox
+rail_routes_peru[rail_routes_peru$within_bbox == 1, ]$name <- "Ferrocarril del Centro"
+rail_routes_peru[rail_routes_peru$within_bbox == 1, ]$operator <- "Ferrovías Central Andina S.A."
 
-  ```
-  df <- st_simplify(df,dTolerance =1000)
-   
-  puentes_buffered <- st_buffer(df,dist = 400,endCapStyle = "FLAT")
-  ```                              
+```
+### 2.5 Extracción de Intersecciones Ferroviarias (Railroad crossings)
+Realizamos una consulta adicional para obtener datos sobre cruces ferroviarios:
+```r
+# Crear consulta para cruces a nivel ferroviarios
+query <- opq(bbox = bbox_peru) %>%
+  add_osm_feature(key = "railway", value = "level_crossing")
 
-- Identificación de siniestros fatales de clase atropello
+# Recuperar los datos
+level_crossings_peru <- osmdata_sf(query)
 
-  Los datos georreferenciados de siniestros fatales del año 2023 vienen siendo actualizados a través del Sistema de Registro de Siniestros de Tránsito (SRAT). Con fecha de cierre de julio de 2023, se dispone de 5548 siniestros fatales a nivel nacional como datos de entrada. Estos registro corresponden a la base de datos histórica del ONSV recopilada desde el 2021. 
+# Extraer cruces a nivel como objeto sf
+level_crossings_points <- level_crossings_peru$osm_points  # Geometrías de puntos
 
-  Para fines de este análisis sobre puentes peatonales, se han seleccionado a los siniestros fatales de clase atropello y atropello/fuga porque involucran al peatón como víctima. Del mismo modo, los puentes peatonales tienen un rol crucial en la prevención de esta clase específica de siniestros fatales.
+# Limpieza de cruces no deseados
+not_desired <- c(4937721971, 7548874513, 7206992004, 10806641416)
+level_crossings_points <- level_crossings_points[!level_crossings_points$osm_id %in% not_desired, ]
+```
+### 2.6 Visualización de Datos en un Mapa Interactivo
+Utilizaremos la librería `tmap` para visualizar nuestras rutas ferroviarias y los cruces a nivel en un mapa interactivo:
+```r
+# Visualización en mapa interactivo
+my_map <- tm_basemap(leaflet::providers$OpenStreetMap, alpha = 0.8) +
+  tm_shape(rail_routes_peru) +
+  tm_lines(col = "name", lwd = 4, palette = c("#00BFFF", "#4169E1", "#FFD700", "#228B22", "#9932CC"),
+           title.col = "Trazos", popup.vars = c("name", "operator")) +
+  tm_shape(level_crossings_points) +
+  tm_dots(col = "name", size = 0.05, palette = "#DC143C", title = "Cruces a Nivel", popup.vars = c("name", "operator"))
 
-- Selección de atropellos en Zona de Influencia de Puentes Peatonales
+# Convertir a formato Leaflet
+my_map <- tmap_leaflet(my_map)
 
-  Como resultado de este análisis, se ha detectado que 119 de los 1570 atropellos registrados entre 2021 y julio de 2023, alrededor de 8%, han ocurrido en zonas de influencia de los puentes peatonales. Esta cifra no debería indicarnos que la causa principal del siniestro fue la imprudencia del peatón al no usar los puentes peatonales próximos. Por el contrario, esto debería motivar a estudiar a detalle las condiciones actuales en las que están implementados hoy los puentes peatonales y las razones por las que no son usados. De este modo, la recuperación y planificación de la infraestructura deben incorporar elementos de seguridad y accesibiliad universal para el cruce peatonal como prioridad de la movilidad sostenible.
+# Guardar el mapa en un archivo HTML
+library(htmlwidgets)
+saveWidget(my_map, "rail_road_map_onsv.html", selfcontained = TRUE)
+```
+En la figura siguiente, se puede mostrar una visualización del mapa desarrollado con la extracción de datos de rutas e intersecciones ferroviarias
+<img align="right" width="800" src="index_images/mapa-interactivo.png" float="center" link>
 
-  ```     
-      crash_pp <- st_intersection(puentes_buffered,atropellos)
-      
-      crash_countpp <-  as.data.frame(count(crash_pp$osm_id))
-      colnames(crash_countpp) <- c("osm_id","Atropellos en PP")
-      
-      df <- merge(df, crash_countpp, by="osm_id", all.x=TRUE)
-      puentes_buffered <-  merge(puentes_buffered, crash_countpp, by="osm_id", all.x=TRUE)
+### 2.7 Consolidación y Exportación de Datos
+Exportamos los datos en formato CSV para un análisis posterior o su uso en el desarrollo de otros tableros analíticos y/o aplicaciones:
+```r
+# Selección de columnas relevantes
+rail_routes_peru <- rail_routes_peru[, c(1, 2, 18, 5, 6, 11, 24, 26, 38)]
+level_crossings_points <- level_crossings_points[, c(1, 3, 4, 19, 20)]
+level_crossings_points$tipo <- "Cruces a nivel con ferrocarril"
 
-      #marcar los siniestros en las zonas de puentes peatonales
-      lista_atrop_pp <- crash_pp$XUFeffCodigoAccidente
+# Convertir geometría a formato WKT
+rail_routes_peru$geometry <- st_as_text(st_geometry(rail_routes_peru))
+level_crossings_points$geometry <- st_as_text(st_geometry(level_crossings_points))
 
-      atropellos <- atropellos%>%
-        mutate(EnPuentePeatonal=NA)
+# Guardar como CSV
+write.csv(rail_routes_peru, "rail_routes_peru.csv", row.names = FALSE)
+write.csv(level_crossings_points, "level_crossings_points.csv", row.names = FALSE)
+```
+## 3. Conclusión
+En esta guía, se orienta a extraer datos de rutas ferroviarias y cruces a nivel en Perú utilizando OpenStreetMap y R. Este tipo de análisis es fundamental para comprender mejor la infraestructura ferroviaria y cómo puede afectar en la seguridad vial. Con las herramientas presentadas, se puede adaptar la consulta a otros elementos del entornos y regiones de interés, lo que permitirá un análisis más profundo de la problemática de la seguridad vial en diferentes contextos.
 
-      atropellos[atropellos$XUFeffCodigoAccidente %in% lista_atrop_pp,]$EnPuentePeatonal <- "Sí"
-  ```
-  
-- Visualización de Puentes Peatonales en los que se registran víctimas fatales
-
-  ```
-  ##plotear los puentes peatonales que tienes 1 o + siniestros fatales
-  df$`Atropellos en PP`!=0
-  seleccion1 <- df[!is.na(df$`Atropellos en PP`),]
-  seleccion2 <- puentes_buffered[!is.na(puentes_buffered$`Atropellos en PP`),]
-
-  tm_shape(seleccion2) + 
-  tm_fill(col="lightblue",alpha = 0.7)+
-  tm_shape(seleccion1) + 
-  tm_lines(col="blue",lwd = 5)+
-  tm_shape(crash_pp)+
-  tm_dots(col="red",size=0.02)
-  ```
