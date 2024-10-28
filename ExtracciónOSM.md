@@ -6,8 +6,8 @@
 **Guía de código en R:** <br />
 Ver documento digital para reproducción en <a href="https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM">https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM</a>.
 
+**Visualización:** <br />
 Ver <a href="https://patriciaig.github.io/SeguridadVialPeru/rail_road_map_onsv">mapa interactivo</a>.
-
 
 **Especialista responsable:** <br />
 Patricia Illacanchi Guerra
