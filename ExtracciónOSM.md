@@ -4,7 +4,7 @@
 ## ¿Cómo extraer datos georeferenciados de OpenStreetMap para su exploración en la movilidad sostenible y segura? 
 
 ### Guía de código en R
-Ver documento digital para reproducción en <a href="https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM">[este enlace](https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM)</a>.
+Ver documento digital para reproducción en <a href="https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM">https://patriciaig.github.io/SeguridadVialPeru/ExtracciónOSM</a>.
 
 
 **Especialista responsable:** <br />
