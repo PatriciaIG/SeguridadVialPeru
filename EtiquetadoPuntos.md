@@ -1,12 +1,48 @@
 <a href="https://www.onsv.gob.pe/"><img align="right" height="100" src="index_images/logo-onsv.png" float="right" link> </a>
 
 
-## Etiquetado de archivos geográficos de puntos con la red vial 
+## ¿Cómo extraer datos georeferenciados de OpenStreetMap para su exploración en la movilidad sostenible y segura? 
 
-### Código en R
+### Guía de código en R
 
 **Especialista responsable:** <br />
 Patricia Illacanchi Guerra
+
+## 1. ¿Qué es OpenStreetMap?
+OpenStreetMap (OSM) es un proyecto colaborativo que proporciona un mapa global editable y libre. Los usuarios pueden visualizar, editar y utilizar información geoespacial del mundo entero. OSM se destaca por:
+- **Accesibilidad**: Información disponible de manera libre y abierta.
+- **Cobertura**: Incluye carreteras, ferrocarriles, edificios, parques, cuerpos de agua, etc.
+- **Participación Colaborativa**: Los datos son generados y actualizados por una comunidad global de usuarios.
+
+### Datos que se pueden obtener en OSM
+A través de OSM, es posible acceder a información como:
+- Rutas de transporte (carreteras, ferrocarriles, rutas de bicicleta).
+- Infraestructuras (edificios, estaciones de tren, hospitales).
+- Puntos de interés (restaurantes, parques, áreas recreativas).
+- Elementos naturales (ríos, montañas, áreas verdes).
+
+### Sintaxis Básica en OSM
+En OSM, se utiliza un sistema de "llave-valor" para definir elementos. Por ejemplo:
+- `key = "highway", value = "primary"` obtiene carreteras principales.
+- `key = "railway", value = "rail"` busca ferrocarriles en uso.
+- `key = "amenity", value = "hospital"` encuentra hospitales.
+
+## 2. Configuración y Extracción de Datos en R
+
+### Instalación de Paquetes Necesarios
+Para realizar consultas en OSM desde R, es necesario instalar y cargar algunos paquetes:
+```r
+# Instalar paquetes si no están instalados
+install.packages("osmdata")
+install.packages("sf")
+install.packages("tmap")
+install.packages("htmlwidgets")
+
+# Cargar las bibliotecas necesarias
+library(osmdata)
+library(sf)
+library(tmap)
+library(htmlwidgets)
 
 ## Introducción
 En el presente documento, se ha identificado la localización de puentes peatonales a nivel nacional a partir de la exploración de mapas base de OpenStreetMap. Sobre esta base de datos, se han extraído las capas de interés y se ha realizado la verificación y limpieza de datos para obtener los puentes peatonales georreferenciados.
