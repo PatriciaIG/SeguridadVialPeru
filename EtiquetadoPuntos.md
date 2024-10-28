@@ -3,7 +3,8 @@
 
 ## ¿Cómo caracterizar bases de datos geográficas de puntos según la jerarquización vial en Perú? 
 
-### Guía de código en R
+**Guía de código en R:** <br />
+Ver documento digital para reproducción en <a href="https://patriciaig.github.io/SeguridadVialPeru/EtiquetadoPuntos">https://patriciaig.github.io/SeguridadVialPeru/EtiquetadoPuntos</a>.
 
 **Especialista responsable:** <br />
 Patricia Illacanchi Guerra
