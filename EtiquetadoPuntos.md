@@ -152,7 +152,7 @@ library(htmlwidgets)
 saveWidget(my_map, "rail_road_map_onsv.html", selfcontained = TRUE)
 ```
 En la figura siguiente, se puede mostrar una visualización del mapa desarrollado con la extracción de datos de rutas e intersecciones ferroviarias
-<img align="right" width="800" src="index_images/mapa-interactivo.png" float="center" link>
+<img align="right" width="800" src="index_images/mapa-interactivo.png" >
 
 ### 2.7 Consolidación y Exportación de Datos
 Exportamos los datos en formato CSV para un análisis posterior o su uso en el desarrollo de otros tableros analíticos y/o aplicaciones:
